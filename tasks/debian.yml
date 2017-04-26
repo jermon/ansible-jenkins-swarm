@@ -2,7 +2,7 @@
 - name: Add a jenkins user and add it to the docker group
   user:
     name: jenkins
-    groups: docker
+#    groups: docker
     append: yes
     state: present
   become: true
@@ -52,8 +52,8 @@
 - name: Create the Swarm Client service def
   template:
     src: swarm-client.service.j2
-    dest: "/lib/systemd/system/{{ jenkins_swarm_service_name }}.service"
-    mode: 0755
+    dest: "/etc/systemd/system/{{ jenkins_swarm_service_name }}.service"
+    mode: 0644
   become: true
   notify:
     - Reload Systemd
